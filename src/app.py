@@ -21,9 +21,17 @@ def handle_invalid_usage(error):
     return jsonify(error.to_dict()), error.status_code
 
 # generate sitemap with all your endpoints
-@app.route('/')
+@app.route('/') # endpoint
 def sitemap():
     return generate_sitemap(app)
+
+@app.route("/member", methods=['POST']) #nwroute POST
+def createMember():
+    member = request.json # member is getting the json with variable
+    jackson_family.add_member(member)
+    return 'Member added', 200
+
+
 
 @app.route('/members', methods=['GET'])
 def handle_hello():
